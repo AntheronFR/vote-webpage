@@ -47,8 +47,9 @@
     <button onclick="submitVote()">Soumettre</button>
 
     <script>
+        // Fonction pour limiter les choix à 2 et envoyer les votes
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        
+
         checkboxes.forEach((checkbox) => {
             checkbox.addEventListener('change', () => {
                 const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -75,7 +76,28 @@
                 alert("Veuillez sélectionner exactement 2 options avant de soumettre.");
                 return;
             }
-            alert("Votre vote a été soumis : " + selected.join(", "));
+
+            // URL de l'application Apps Script
+            const endpoint = "https://script.google.com/macros/s/AKfycbzqQtDrN1NeHPGsZnnEShQhqN3kBzOa3Q9Ou4HN_oLvxQjuLQUVbM1366uNLUSQqHHB/exec";
+
+            // Envoyer les données via une requête POST
+            fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ votes: selected })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Votre vote a été soumis avec succès !");
+                } else {
+                    alert("Une erreur est survenue lors de l'envoi des votes.");
+                }
+            })
+            .catch(error => {
+                console.error("Erreur :", error);
+                alert("Impossible de soumettre le vote pour le moment.");
+            });
         }
     </script>
 </body>
