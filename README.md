@@ -7,9 +7,31 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function () {
-            // Initialise EmailJS avec ton user ID
-            emailjs.init("TON_PUBLIC_KEY"); // Remplace par ta clé publique EmailJS
+            // Initialise EmailJS avec ta clé publique
+            emailjs.init("cfU_vhO0TdIX-1Rzu"); // Remplace par ta clé publique EmailJS
         })();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', () => {
+                    const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+                    if (checkedBoxes.length >= 2) {
+                        checkboxes.forEach((cb) => {
+                            if (!cb.checked) {
+                                cb.disabled = true; // Désactiver les cases non cochées
+                            }
+                        });
+                    } else {
+                        checkboxes.forEach((cb) => {
+                            cb.disabled = false; // Réactiver toutes les cases si moins de 2 cochées
+                        });
+                    }
+                });
+            });
+        });
 
         function submitVote() {
             const selected = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
@@ -18,19 +40,17 @@
                 return;
             }
 
-            // Préparer les données pour l'e-mail
             const templateParams = {
                 votes: selected.join(", "), // Combine les votes en une chaîne
                 date: new Date().toLocaleString(), // Ajoute la date de soumission
             };
 
-            // Envoyer l'email via EmailJS
-            emailjs.send("service_6gjiwu3", "TON_TEMPLATE_ID", templateParams)
+            emailjs.send("service_6qgiwu3", "template_l2l3pi4", templateParams) // Remplace par TON_TEMPLATE_ID
                 .then(function () {
                     alert("Merci pour votre vote !");
                 }, function (error) {
-                    alert("Une erreur est survenue lors de l'envoi du vote.");
                     console.error("Erreur :", error);
+                    alert("Une erreur est survenue lors de l'envoi du vote.");
                 });
         }
     </script>
@@ -68,9 +88,8 @@
     </style>
 </head>
 <body>
-    <h1>À la recherche du nouveau nom pour Spine</h1>
-    <p>Merci pour vos propositions ! Il est temps de voter pour vos préférées.<br>
-        Vous pouvez choisir une ou deux options.</p>
+    <h1>À la recherche du nouveau nom pour Spine 2</h1>
+    <p>Merci pour vos propositions ! Vous pouvez voter pour une ou deux options.</p>
     
     <div class="checkbox-group">
         <p><strong>Les propositions de l'équipe</strong></p>
