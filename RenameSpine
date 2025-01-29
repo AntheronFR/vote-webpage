@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votez pour vos options préférées</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            if (checkboxes.length > 2) {
+                alert("Vous ne pouvez sélectionner que 2 options !");
+                return false;
+            }
+            alert("Votre vote a été soumis avec succès !");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Votez pour vos options préférées</h1>
+    <form onsubmit="return validateForm()" method="POST">
+        <label><input type="checkbox" name="option" value="1"> Option 1</label><br>
+        <label><input type="checkbox" name="option" value="2"> Option 2</label><br>
+        <label><input type="checkbox" name="option" value="3"> Option 3</label><br>
+        <label><input type="checkbox" name="option" value="4"> Option 4</label><br>
+        <label><input type="checkbox" name="option" value="5"> Option 5</label><br>
+        <label><input type="checkbox" name="option" value="6"> Option 6</label><br>
+        <button type="submit">Envoyer</button>
+    </form>
+</body>
+</html>
