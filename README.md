@@ -68,7 +68,7 @@
     </style>
 </head>
 <body>
-    <h1>À la recherche du nouveau nom</h1>
+    <h1>À la recherche du nouveau nom pour Spine</h1>
     <p>Merci pour vos propositions ! Il est temps de voter pour vos préférées.<br>
         Vous pouvez choisir une ou deux options.</p>
     
