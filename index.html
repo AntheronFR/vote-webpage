@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote webpage</title>
+</head>
+<body>
+  <form action="https://formsubmit.co/allan.petitjean@gmail.com" method="POST" id="voteForm">
+    <h1>À la recherche du nouveau nom pour Spine v2.0</h1>
+    <p>Merci pour vos propositions ! Vous pouvez voter pour une ou deux options.</p>
+
+    <div>
+      <label>
+        <input type="checkbox" name="votes[]" value="Bloom"> Bloom (floraison = croissance)
+      </label><br>
+      <label>
+        <input type="checkbox" name="votes[]" value="Content Studio"> Content Studio
+      </label><br>
+      <label>
+        <input type="checkbox" name="votes[]" value="Spark"> Spark (l'étincelle qui initie quelque chose de plus grand)
+      </label><br>
+      <label>
+        <input type="checkbox" name="votes[]" value="Node"> Node (nœud, intersection, point de connexion entre les contenus, formats, les plateformes)
+      </label><br>
+      <label>
+        <input type="checkbox" name="votes[]" value="Fuse"> Fuse (la fusion/connexion entre les contenus et les plateformes)
+      </label><br>
+    </div>
+
+    <button type="submit">Soumettre</button>
+  </form>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const form = document.getElementById("voteForm");
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+          if (checkedBoxes.length >= 2) {
+            checkboxes.forEach((cb) => {
+              if (!cb.checked) {
+                cb.disabled = true;
+              }
+            });
+          } else {
+            checkboxes.forEach((cb) => {
+              cb.disabled = false;
+            });
+          }
+        });
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        alert("Merci pour votre vote ! Vos choix ont été soumis.");
+        form.submit(); // Permet d'envoyer après avoir affiché l'alerte
+      });
+    });
+  </script>
+</body>
+</html>
